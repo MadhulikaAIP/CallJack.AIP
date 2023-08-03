@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const PORT = 3000;
+const PORT = 3001;
 const mysql = require('mysql');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -14,6 +14,7 @@ const stripe = require('stripe')('sk_test_51NNWAySCTPDkRA5G0CP2aNpOeB4i4yw7Pw6MS
 // Middleware for parsing JSON bodies
 app.use(express.json());
 
+// Session middle
 // Session middleware
 app.use(
   session({
@@ -22,13 +23,14 @@ app.use(
     saveUninitialized: false,
   })
 );
-
+require('dotenv').config();
 // MySQL database connection
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'Madhusri@2208',
-  database: 'calljack',
+  host: process.env.MYSQL_ADDON_HOST,
+  user: process.env.MYSQL_ADDON_USER,
+  password: process.env.MYSQL_ADDON_PASSWORD,
+  database: process.env.MYSQL_ADDON_DB,
+  port: process.env.MYSQL_ADDON_PORT,
   multipleStatements: true,
 });
 
