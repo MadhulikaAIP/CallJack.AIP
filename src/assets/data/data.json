@@ -1,0 +1,301 @@
+{
+  "Header": {
+    "title": "Find the Perfect Contractor",
+    "paragraph": "Post your job and connect with skilled contractors for your repair and maintenance needs."
+  },
+  "About": {
+    "paragraph": "Welcome to Contractor Connect, your go-to platform for finding skilled contractors for your repair and maintenance needs. We understand the importance of finding reliable and trustworthy professionals for your projects, and that's why we've created a seamless platform that connects property owners, managers, and contractors.\n\n With Contractor Connect, you can easily post your job requirements and receive responses from qualified contractors. Our platform allows you to browse through a diverse pool of contractors, review their profiles, and communicate directly with them to discuss project details. \n\nWe prioritize the security and satisfaction of our users. That's why we have implemented a secure payment gateway, ensuring that your financial transactions are protected.\n\nWhether you need a contractor for home repairs, renovations, or ongoing property maintenance, Contractor Connect is here to help. Join our community today and experience the convenience and efficiency of connecting with skilled contractors.",
+    
+    "Why": [
+      "Quality Contractors",
+      "Convenience and Efficiency",
+      "Wide Range of Services"
+    ],
+    "Why2": [
+      "Transparent Communication",
+      "Secure Payment Gateway"
+    ]
+  },
+  "Gallery": [
+    {
+      "title": "Home Renovation",
+      "largeImage": "img/portfolio/Home-Large.jpg",
+      "smallImage": "img/portfolio/Home-Small.jpg"
+    },
+    {
+      "title": "Kitchen Remodeling",
+      "largeImage": "img/portfolio/Kitech-Large.jpg",
+      "smallImage": "img/portfolio/Kitech-Small.jpg"
+    },
+    {
+      "title": "Bathroom Renovation",
+      "largeImage": "img/portfolio/Bathroom-Large.jpg",
+      "smallImage": "img/portfolio/Bathroom-Small.jpg"
+    },
+    {
+      "title": "Exterior Painting",
+      "largeImage": "img/portfolio/Painting-Large.jpg",
+      "smallImage": "img/portfolio/Painting-Small.jpg"
+    },
+    {
+      "title": "Roof Repair",
+      "largeImage": "img/portfolio/Roof-Large.jpg",
+      "smallImage": "img/portfolio/Roof-Small.jpg"
+    },
+    {
+      "title": "Flooring Installation ",
+      "largeImage": "img/portfolio/floor_Large.jpg",
+      "smallImage": "img/portfolio/floor_small.jpg"
+    },
+    {
+      "title": "Landscape Design",
+      "largeImage": "img/portfolio/Land_Large.jpg",
+      "smallImage": "img/portfolio/Land_Small.jpg"
+    },
+    {
+      "title": "Plumbing Work",
+      "largeImage": "img/portfolio/Plumb_Large.jpg",
+      "smallImage": "img/portfolio/Plumb_Small.jpg"
+    },
+    {
+      "title": "Electrical Work",
+      "largeImage": "img/portfolio/09-large.jpg",
+      "smallImage": "img/portfolio/09-small.jpg"
+    }
+  ],
+  "Services": [
+    {
+      "icon": "fa fa-wrench",
+      "name": "Home Repairs",
+      "text": "Our experienced contractors can handle various home repair tasks, including plumbing, electrical, carpentry, and more. We ensure quality workmanship and timely completion of projects."
+    },
+    {
+      "icon": "fa fa-building-o",
+      "name": "Renovations",
+      "text": "From kitchen and bathroom renovations to whole-house makeovers, our contractors have the expertise to transform your space.We provide personalized solutions."
+    },
+    {
+      "icon": "fa fa-cogs",
+      "name": "Property Maintenance",
+      "text": "We offer comprehensive property maintenance services, including regular inspections, repairs, and upkeep. Our contractors ensure that your property remains in top condition."
+    },
+    {
+      "icon": "fa fa-paint-brush",
+      "name": "Painting Services",
+      "text": "Enhance the appearance of your property with our professional painting services. Our contractors use high-quality materials and techniques to deliver exceptional results."
+    },
+    {
+      "icon": "fa fa-tree",
+      "name": "Outdoor Projects",
+      "text": "Need assistance with outdoor projects? Our contractors can help with landscaping, patio installations, fence repairs, and more. Enjoy a beautiful outdoor space with our services."
+    },
+    {
+      "icon": "fa fa-puzzle-piece",
+      "name": "Custom Projects",
+      "text": "Have a unique project in mind? Our contractors specialize in custom projects and can bring your ideas to life. We collaborate closely with you to deliver tailored solutions."
+    }
+  ],
+  "Testimonials": [
+    {
+      "img": "img/testimonials/01.jpg",
+      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
+      "name": "John Doe"
+    },
+    {
+      "img": "img/testimonials/02.jpg",
+      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
+      "name": "Johnathan Doe"
+    },
+    {
+      "img": "img/testimonials/03.jpg",
+      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
+      "name": "John Doe"
+    },
+    {
+      "img": "img/testimonials/04.jpg",
+      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
+      "name": "Johnathan Doe"
+    },
+    {
+      "img": "img/testimonials/05.jpg",
+      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
+      "name": "John Doe"
+    },
+    {
+      "img": "img/testimonials/06.jpg",
+      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
+      "name": "Johnathan Doe"
+    }
+  ],
+  "Team": [
+    {
+      "img": "img/team/Madhulika.jpeg",
+      "name": "Madhulika Avula",
+      "job": "Project Manager"
+    },
+    {
+      "img": "img/team/Sashank.jpeg",
+      "name": "Sashank Attaluri",
+      "job": "Solutioning & Design"
+    },
+    {
+      "img": "img/team/Mehak.jpeg",
+      "name": "Mehakdeep Kaur",
+      "job": "Developer"
+    },
+    {
+      "img": "img/team/Ashpreet.jpeg",
+      "name": "Ashpreet Kaur",
+      "job": "Testing & QA"
+    },
+    
+    {
+      "img": "img/team/Sukhan.jpeg",
+      "name": "Sukhandeep Kaur",
+      "job": "Cloud Engineer"
+    },
+    {
+      "img": "img/team/Likhitha.jpeg",
+      "name": "Likhitha Vemuri",
+      "job": "Researcher"
+    },
+    {
+      "img": "img/team",
+      "name": "Abdul Khan",
+      "job": "Project Advisor"
+    },
+    {
+      "img": "img/team/Stanley.png",
+      "name": "Stanley Chor",
+      "job": "Project Coordinator"
+    }
+  ],
+  "Contact": {
+    "address": "4000 Victoria Park Ave, North York, ON M2H 3P4 ",
+    "phone": "+1 (416) 291-5155",
+    "email": "loyalistintoronto@tbcollege.com",
+    "facebook": "fb.com",
+    "twitter": "twitter.com",
+    "youtube": "youtube.com"
+  },
+  "Features": [
+    {
+      "icon": "fa fa-briefcase",
+      "title": "Easy Job Posting",
+      "text": "Quickly describe your repair/maintenance needs and get responses from contractors."
+    },
+    {
+      "icon": "fa fa-search",
+      "title": "Browse Contractors",
+      "text": "Search and browse through a pool of skilled contractors based on your specific criteria."
+    },
+    {
+      "icon": "fa fa-comment",
+      "title": "Direct Communication",
+      "text": "Communicate directly with contractors to discuss project details and requirements."
+    },
+    {
+      "icon": "fa fa-lock",
+      "title": "Secure Payment Gateway",
+      "text": "Experience hassle-free and secure payment processing for your contractor services."
+    }
+  ],
+
+  "JobsData":[
+    {
+      "id": 1,
+      "title": "Electrical Repair Technician",
+      "description": "We are seeking an experienced electrical repair technician to handle various electrical repair and troubleshooting tasks. Must have a deep understanding of electrical systems and possess excellent problem-solving skills.",
+      "company": "ABC Electrical Services",
+      "location": "City A"
+    },
+    {
+      "id": 2,
+      "title": "Plumbing Maintenance Specialist",
+      "description": "We are looking for a skilled plumbing maintenance specialist to perform routine maintenance, repairs, and installations of plumbing systems. Strong knowledge of plumbing codes and regulations is required.",
+      "company": "XYZ Plumbing Solutions",
+      "location": "City B"
+    },
+    {
+      "id": 3,
+      "title": "HVAC Technician",
+      "description": "We are hiring an HVAC technician to provide heating, ventilation, and air conditioning services. The ideal candidate should have experience in servicing and troubleshooting HVAC systems and be familiar with different types of equipment.",
+      "company": "Cool Air HVAC Services",
+      "location": "City C"
+    }
+  ],
+
+  "ContractorsData":[
+    {
+      "id": 1,
+      "name": "John Doe",
+      "specialty": "Plumbing",
+      "location": "City A",
+      "contact": "john.doe@example.com"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "specialty": "Electrical",
+      "location": "City B",
+      "contact": "jane.smith@example.com"
+    },
+    {
+      "id": 3,
+      "name": "Mike Johnson",
+      "specialty": "Carpentry",
+      "location": "City C",
+      "contact": "mike.johnson@example.com"
+    },
+    {
+      "id": 4,
+      "name": "Sarah Davis",
+      "specialty": "Painting",
+      "location": "City A",
+      "contact": "sarah.davis@example.com"
+    },
+    {
+      "id": 5,
+      "name": "Tom Wilson",
+      "specialty": "Roofing",
+      "location": "City B",
+      "contact": "tom.wilson@example.com"
+    }
+  ],
+  
+  "provinces": [
+    { "id": 1, "name": "Alberta" },
+    { "id": 2, "name": "British Columbia" },
+    { "id": 3, "name": "Manitoba" },
+    { "id": 4, "name": "New Brunswick" },
+    { "id": 5, "name": "Newfoundland and Labrador" },
+    { "id": 6, "name": "Nova Scotia" },
+    { "id": 7, "name": "Ontario" },
+    { "id": 8, "name": "Prince Edward Island" },
+    { "id": 9, "name": "Quebec" },
+    { "id": 10, "name": "Saskatchewan" },
+    { "id": 11, "name": "Northwest Territories" },
+    { "id": 12, "name": "Nunavut" },
+    { "id": 13, "name": "Yukon" }
+  ],
+  "cities": [
+    { "id": 1, "name": "Calgary", "provinceId": 1 },
+    { "id": 2, "name": "Edmonton", "provinceId": 1 },
+    { "id": 3, "name": "Vancouver", "provinceId": 2 },
+    { "id": 4, "name": "Victoria", "provinceId": 2 },
+    { "id": 5, "name": "Winnipeg", "provinceId": 3 },
+    { "id": 6, "name": "Fredericton", "provinceId": 4 },
+    { "id": 7, "name": "St. John's", "provinceId": 5 },
+    { "id": 8, "name": "Halifax", "provinceId": 6 },
+    { "id": 9, "name": "Toronto", "provinceId": 7 },
+    { "id": 10, "name": "Ottawa", "provinceId": 7 },
+    { "id": 11, "name": "Charlottetown", "provinceId": 8 },
+    { "id": 12, "name": "Quebec City", "provinceId": 9 },
+    { "id": 13, "name": "Regina", "provinceId": 10 },
+    { "id": 14, "name": "Saskatoon", "provinceId": 10 },
+    { "id": 15, "name": "Yellowknife", "provinceId": 11 },
+    { "id": 16, "name": "Iqaluit", "provinceId": 12 },
+    { "id": 17, "name": "Whitehorse", "provinceId": 13 }
+  ]
+  
+}

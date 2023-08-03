@@ -1,0 +1,217 @@
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+
+const TopNavbar = styled.nav`
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+`;
+
+const Container = styled.div`
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const SearchBar = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+  input {
+    flex-grow: 1;
+    height: 40px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+`;
+
+const CardContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
+  width: 100%;
+`;
+
+const Card = styled.div`
+  position: relative;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
+const CardContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+`;
+
+const CardTitle = styled.h3`
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+`;
+
+const CardDescription = styled.p`
+  margin: 10px 0;
+`;
+
+const ViewButton = styled.button`
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
+
+const PopUpCard = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+`;
+
+const PopUpContent = styled.div`
+  position: relative;
+  width: 80%;
+  max-width: 600px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 4px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+`;
+
+const OwnerIndex = () => {
+  const [contractors, setContractors] = useState([
+    { id: 1, name: 'Contractor 1', description: 'Description 1' },
+    { id: 2, name: 'Contractor 2', description: 'Description 2' },
+    { id: 3, name: 'Contractor 3', description: 'Description 3' },
+  ]);
+
+  const [jobPosts, setJobPosts] = useState([
+    { id: 1, title: 'Job Post 1', description: 'Description 1' },
+    { id: 2, title: 'Job Post 2', description: 'Description 2' },
+    { id: 3, title: 'Job Post 3', description: 'Description 3' },
+  ]);
+
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredContractors, setFilteredContractors] = useState([]);
+  const [filteredJobPosts, setFilteredJobPosts] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  useEffect(() => {
+    filterContractors();
+    filterJobPosts();
+  }, [searchQuery]);
+
+  const handleSearch = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filterContractors = () => {
+    const filteredContractors = contractors.filter((contractor) =>
+      contractor.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredContractors(filteredContractors);
+  };
+
+  const filterJobPosts = () => {
+    const filteredJobPosts = jobPosts.filter((jobPost) =>
+      jobPost.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredJobPosts(filteredJobPosts);
+  };
+
+  const openPopUp = (item) => {
+    setSelectedItem(item);
+  };
+
+  const closePopUp = () => {
+    setSelectedItem(null);
+  };
+
+  return (
+    <div>
+      <TopNavbar>Top Navigation Bar</TopNavbar>
+
+      <Container>
+        <SearchBar>
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={handleSearch}
+          />
+        </SearchBar>
+
+        <CardContainer>
+          {/* Render the contractor cards */}
+          {filteredContractors.map((contractor) => (
+            <Card key={contractor.id}>
+              <CardContent>
+                <CardTitle>{contractor.name}</CardTitle>
+                <CardDescription>{contractor.description}</CardDescription>
+                <ViewButton onClick={() => openPopUp(contractor)}>
+                  View
+                </ViewButton>
+              </CardContent>
+            </Card>
+          ))}
+
+          {/* Render the job post cards */}
+          {filteredJobPosts.map((jobPost) => (
+            <Card key={jobPost.id}>
+              <CardContent>
+                <CardTitle>{jobPost.title}</CardTitle>
+                <CardDescription>{jobPost.description}</CardDescription>
+                <ViewButton onClick={() => openPopUp(jobPost)}>View</ViewButton>
+              </CardContent>
+            </Card>
+          ))}
+        </CardContainer>
+      </Container>
+
+      {/* Pop-up card */}
+      {selectedItem && (
+        <PopUpCard>
+          <PopUpContent>
+            <CloseButton onClick={closePopUp}>Close</CloseButton>
+            {/* Render the pop-up card content */}
+            <CardTitle>{selectedItem.title || selectedItem.name}</CardTitle>
+            <CardDescription>{selectedItem.description}</CardDescription>
+          </PopUpContent>
+        </PopUpCard>
+      )}
+    </div>
+  );
+};
+
+export default OwnerIndex;
