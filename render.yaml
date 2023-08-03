@@ -1,0 +1,16 @@
+# render.yaml
+
+services:
+  - name: frontend
+    env:
+      - key: NODE_ENV
+        value: production
+    buildCommand: npm run build
+    startCommand: npm start
+
+  - name: backend
+    env:
+      - key: NODE_ENV
+        value: production
+    buildCommand: npm install
+    startCommand: node server.js
