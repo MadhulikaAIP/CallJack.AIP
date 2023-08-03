@@ -31,7 +31,7 @@ export default function TopNavbar() {
             <img
               src={Logo}
               alt="Call-Jack"
-              style={{ width: "200px", height: "50px", marginTop: "20px", marginLeft: "-200px" }}
+              style={{ width: "200px", height: "50px", marginTop: "20px", marginLeft: "-150px" }}
             />
           </RouterLink>
 

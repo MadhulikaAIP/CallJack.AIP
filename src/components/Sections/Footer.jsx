@@ -20,7 +20,7 @@ export default function Contact() {
             <img
              src={Logo}
               alt="Call-Jack"
-              style={{ width: "150px", height: "50px", marginTop:"20px", marginLeft:"-200px"}}
+              style={{ width: "150px", height: "50px", marginTop:"20px", marginLeft:"-150px"}}
             />  
               {/* <Logo/>
               <h1 className="font15 extraBold whiteColor" style={{ marginLeft: "15px" }}>
