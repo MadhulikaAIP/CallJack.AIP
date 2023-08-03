@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Link } from "react-scroll";
-import { Link as RouterLink } from "react-router-dom"; // Import the Link component from react-router-dom
-
-// Components
-import Backdrop from "./elements/Backdrop";
-// Assets
-// import LogoIcon from "../../assets/svg/Logo";
-import Logo from "../../assets/img/Logo1.jpg"
+import { Link as RouterLink } from "react-router-dom";
+import Logo from "../../assets/img/Logo1.jpg";
 import BurgerIcon from "../../assets/svg/BurgerIcon";
 
 export default function TopNavbar() {
@@ -21,48 +16,57 @@ export default function TopNavbar() {
     };
   }, [y]);
 
-
   return (
     <>
       <Wrapper className="flexCenter animate blackBg" style={y > 100 ? { height: "60px" } : { height: "80px" }}>
         <NavInner className="container flexSpaceCenter">
-        <RouterLink className="" to="/owner" smooth={true}>
-          <img
-             src={Logo}
+          <RouterLink className="" to="/owner" smooth={true}>
+            <img
+              src={Logo}
               alt="Call-Jack"
-              style={{ width: "200px", height: "50px", marginTop:"15px", marginLeft:"-350px"}}
-            />  
+              style={{ width: "200px", height: "50px", marginTop: "15px", marginLeft: "-350px" }}
+            />
           </RouterLink>
-          {/* <Link className="pointer flexNullCenter" to="home" smooth={true}>
-            <LogoIcon />
-            <h1 style={{ marginLeft: "15px" }} className="font20 extraBold">
-              Call-Jack
-            </h1>
-          </Link> */}
+
           <BurderWrapper className="pointer" onClick={() => toggleSidebar(!sidebarOpen)}>
             <BurgerIcon />
           </BurderWrapper>
-          
-          <UlWrapperRight className="flexNullCenter">
+
+          <UlWrapper className="flexNullCenter">
             <li className="semiBold font15 pointer">
-              <RouterLink to="/owner/settings" style={{ padding: "10px 30px 10px 0" }}>
-                
-              </RouterLink>
+              <RouterLink to="/owner/settings" style={{ padding: "10px 30px 10px 0" }}></RouterLink>
             </li>
             <li className="semiBold font15 pointer">
-              <RouterLink to="/owner/profile" style={{ padding: "10px 30px 10px 0" }}>
-                
-              </RouterLink>
+              <RouterLink to="/owner/profile" style={{ padding: "10px 30px 10px 0" }}></RouterLink>
             </li>
             <li className="semiBold font15 pointer">
-              <CurrentTime style={{ padding: "10px 30px 10px 10px",fontSize:"18px",fontWeight:"bold",color:"white" }}>{new Date().toLocaleTimeString()}</CurrentTime>
+              <CurrentTime style={{ padding: "10px 30px 10px 10px", fontSize: "18px", fontWeight: "bold", color: "white" }}>
+                {new Date().toLocaleTimeString()}
+              </CurrentTime>
             </li>
             <li className="semiBold font15 pointer">
-              <RouterLink to="/" style={{ padding: "10px 30px 10px 10px" ,fontSize:"18px",fontWeight:"bold",color:"white" }}>
+              <RouterLink
+                to="/"
+                style={{ padding: "10px 30px 10px 10px", fontSize: "18px", fontWeight: "bold", color: "white" }}
+              >
                 Logout
               </RouterLink>
             </li>
-          </UlWrapperRight>
+          </UlWrapper>
+
+          <SidebarContainer isOpen={sidebarOpen}>
+            <UlWrapperSidebar>
+              <li className="semiBold font15 pointer">
+                <RouterLink to="/owner/settings">Settings</RouterLink>
+              </li>
+              <li className="semiBold font15 pointer">
+                <RouterLink to="/owner/profile">Profile</RouterLink>
+              </li>
+              <li className="semiBold font15 pointer">
+                <RouterLink to="/">Logout</RouterLink>
+              </li>
+            </UlWrapperSidebar>
+          </SidebarContainer>
         </NavInner>
       </Wrapper>
     </>
@@ -76,10 +80,12 @@ const Wrapper = styled.nav`
   left: 0;
   z-index: 999;
 `;
+
 const NavInner = styled.div`
   position: relative;
   height: 100%;
-`
+`;
+
 const BurderWrapper = styled.button`
   outline: none;
   border: 0px;
@@ -91,12 +97,14 @@ const BurderWrapper = styled.button`
     display: block;
   }
 `;
+
 const UlWrapper = styled.ul`
   display: flex;
   @media (max-width: 760px) {
     display: none;
   }
 `;
+
 const UlWrapperRight = styled.ul`
   @media (max-width: 760px) {
     display: none;
@@ -104,7 +112,50 @@ const UlWrapperRight = styled.ul`
     margin-bottom: 10px;
   }
 `;
+
 const CurrentTime = styled.p`
   font-size: 18px;
   color: Black;
+`;
+
+const SidebarContainer = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  background-color: #ffffff;
+  width: 70%;
+  z-index: 1000;
+  transform: ${({ isOpen }) => (isOpen ? "translateX(0)" : "translateX(100%)")};
+  transition: transform 0.3s ease-in-out;
+  @media (min-width: 760px) {
+    display: none;
+  }
+`;
+
+const UlWrapperSidebar = styled.ul`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  & li {
+    padding: 10px 0;
+    border-bottom: 1px solid #e5e5e5;
+  }
+  & li:last-child {
+    border-bottom: none;
+  }
+  @media (max-width: 760px) {
+    flex-direction: column;
+    justify-content: center;
+    & li {
+      width: 100%;
+      text-align: center;
+      padding: 10px;
+    }
+  }
 `;
