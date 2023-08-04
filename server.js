@@ -51,7 +51,7 @@ app.post('/register', (req, res) => {
 
   // Check if the email already exists in the database
   const emailCheckQuery = 'SELECT * FROM users WHERE email = ? AND role = ?';
-  connection.query(emailCheckQuery, [email,role], (emailError, emailResults) => {
+  connection.query(emailCheckQuery, [email, role], (emailError, emailResults) => {
     if (emailError) {
       console.error('Error executing MySQL query:', emailError);
       return res.status(500).json({ error: 'Internal Server Error' });
@@ -81,55 +81,72 @@ app.post('/register', (req, res) => {
     }
 
     function registerUser() {
-      bcrypt.hash(password, saltRounds, (bcryptError, hash) => {
-        if (bcryptError) {
-          console.error('Error hashing password:', bcryptError);
+      // Find the previous id column value
+      const prevIdQuery = 'SELECT id FROM users ORDER BY id DESC LIMIT 1';
+      connection.query(prevIdQuery, (prevIdError, prevIdResult) => {
+        if (prevIdError) {
+          console.error('Error executing MySQL query:', prevIdError);
           return res.status(500).json({ error: 'Internal Server Error' });
         }
 
-        const insertQuery = 'INSERT INTO users (username, password, email, role, phone_number, experience, reputation, bio, field_of_work) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
-        connection.query(insertQuery, [username, hash, email, role, phoneNumber, experience, reputation, bio, fieldOfWork], (insertError, insertResults) => {
-          if (insertError) {
-            console.error('Error executing MySQL query:', insertError);
+        let prevId = 0;
+        if (prevIdResult.length > 0) {
+          prevId = prevIdResult[0].id;
+        }
+
+        // Generate the userid
+        const firstLetter = username.charAt(0).toUpperCase();
+        const userid = `${firstLetter}-${prevId + 1}`;
+
+        bcrypt.hash(password, saltRounds, (bcryptError, hash) => {
+          if (bcryptError) {
+            console.error('Error hashing password:', bcryptError);
             return res.status(500).json({ error: 'Internal Server Error' });
           }
 
-          if (insertResults.affectedRows > 0) {
-            // Retrieve the inserted user's details from the database
-            const userQuery = 'SELECT * FROM users WHERE id = ?';
-            connection.query(userQuery, [insertResults.insertId], (userError, userResults) => {
-              if (userError) {
-                console.error('Error retrieving user details:', userError);
-                return res.status(500).json({ error: 'Internal Server Error' });
-              }
+          const insertQuery = 'INSERT INTO users (username, password, email, role, phone_number, experience, reputation, bio, field_of_work, userid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+          connection.query(insertQuery, [username, hash, email, role, phoneNumber, experience, reputation, bio, fieldOfWork, userid], (insertError, insertResults) => {
+            if (insertError) {
+              console.error('Error executing MySQL query:', insertError);
+              return res.status(500).json({ error: 'Internal Server Error' });
+            }
 
-              const user = userResults[0];
+            if (insertResults.affectedRows > 0) {
+              // Retrieve the inserted user's details from the database
+              const userQuery = 'SELECT * FROM users WHERE id = ?';
+              connection.query(userQuery, [insertResults.insertId], (userError, userResults) => {
+                if (userError) {
+                  console.error('Error retrieving user details:', userError);
+                  return res.status(500).json({ error: 'Internal Server Error' });
+                }
 
-              res.json({
-                message: 'Registration successful',
-                user: {
-                  id: user.id,
-                  username: user.username,
-                  email: user.email,
-                  role: user.role,
-                  phoneNumber: user.phone_number,
-                  experience: user.experience,
-                  reputation: user.reputation,
-                  bio: user.bio,
-                  fieldOfWork: user.field_of_work,
-                },
+                const user = userResults[0];
+
+                res.json({
+                  message: 'Registration successful',
+                  user: {
+                    id: user.id,
+                    username: user.username,
+                    email: user.email,
+                    role: user.role,
+                    phoneNumber: user.phone_number,
+                    experience: user.experience,
+                    reputation: user.reputation,
+                    bio: user.bio,
+                    fieldOfWork: user.field_of_work,
+                    userid: user.userid, // Include the generated userid in the response
+                  },
+                });
               });
-            });
-          } else {
-            res.status(500).json({ error: 'Failed to register user' });
-          }
+            } else {
+              res.status(500).json({ error: 'Failed to register user' });
+            }
+          });
         });
       });
     }
   });
 });
-
-
 
 // Login endpoint
 app.post('/login', (req, res) => {
