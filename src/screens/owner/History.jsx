@@ -101,7 +101,7 @@ const Table = styled.table`
 `;
 
 const FooterWrapper = styled.footer`
-margin-top: 360px;
+margin-top: auto;
 margin-left: -500px;
 `;
 
