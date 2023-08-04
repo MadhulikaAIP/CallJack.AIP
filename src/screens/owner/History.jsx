@@ -68,7 +68,7 @@ const Title = styled.h1`
   font-size: 24px;
   margin-bottom: 0px;
   margin-top: 70px;
-  padding-left: 700px;
+  padding-left: 500px;
   border: 3px solid;
   background-color: lightgray;
 `;
