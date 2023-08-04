@@ -471,6 +471,6 @@ const MainContent = styled.div`
 `;
 
 const FooterWrapper = styled.footer`
-margin-top: 620px;
+margin-top: auto;
 margin-left: -500px;
 `;
