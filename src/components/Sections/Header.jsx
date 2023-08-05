@@ -94,7 +94,7 @@ const BtnWrapper = styled.div`
 `;
 const GreyDiv = styled.div`
   width: 30%;
-  height: 700px;
+  height: 640px;
   position: absolute;
   top: 0;
   right: 0;
