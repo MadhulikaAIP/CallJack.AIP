@@ -14,7 +14,8 @@ export default function Header() {
         <div>
           <h1 className="extraBold font60">Call-Jack</h1>
           <HeaderP className="font13 semiBold">
-          Welcome to Call Jack, your go-to platform for finding skilled contractors for your repair and maintenance needs. We understand the importance of finding reliable and trustworthy professionals for your projects, and that's why we've created a seamless platform that connects property owners, managers, and contractors. With Contractor Connect, you can easily post your job requirements and receive responses from qualified contractors. Our platform allows you to browse through a diverse pool of contractors, review their profiles, and communicate directly with them to discuss project details. We prioritize the security and satisfaction of our users. That's why we have implemented a secure payment gateway, ensuring that your financial transactions are protected. Whether you need a contractor for home repairs, renovations, or ongoing property maintenance, Contractor Connect is here to help. Join our community today and experience the convenience and efficiency of connecting with skilled contractors.  </HeaderP>
+          Welcome and Discover Call Jack - Your ultimate platform for skilled contractors.
+          Post jobs, review profiles, and connect directly to efficiently complete your projects!  </HeaderP>
           <BtnWrapper>
             <FullButton title="Get Started" />
           </BtnWrapper>
