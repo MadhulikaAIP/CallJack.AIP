@@ -216,11 +216,12 @@ export default function MessageScreen() {
     console.log("ownerId:", ownerId);
   }, [contractorId, ownerId]);
 
- // Sort sentMessages based on timestamp
-  const sortedSentMessages = sentMessages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+   // Combine sent and received messages into a single array
+  const allMessages = [...sentMessages, ...receivedMessages];
 
-  // Sort receivedMessages based on timestamp
-  const sortedReceivedMessages = receivedMessages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+  // Sort all messages based on timestamp
+  const sortedMessages = allMessages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
   
   return (
     <Wrapper>
@@ -248,19 +249,19 @@ export default function MessageScreen() {
           <Info>Contractor ID: {contractorId}</Info>
 
            <MessageContainer>
-            {sortedReceivedMessages.map((message) => (
-              <Message key={message.id}>
-                <MessageContent>{message.message}</MessageContent>
-                <MessageSender>Owner: {message.senderId === contractorId ? ownerId : contractorId}</MessageSender>
-              </Message>
-            ))}
-            {sortedSentMessages.map((message) => (
-              <Message key={message.id} sent>
-                <MessageContent sent>{message.message}</MessageContent>
-                <MessageSender>You: {message.senderId === contractorId ? contractorId : ownerId}</MessageSender>
-              </Message>
-            ))}
-          </MessageContainer>
+        {/* Display all messages */}
+        {sortedMessages.map((message) => (
+          <Message key={message.id} sent={message.senderId === contractorId}>
+            <MessageContent sent={message.senderId === contractorId}>
+              {message.message}
+            </MessageContent>
+            <MessageSender>
+              {message.senderId === contractorId ? "You" : "Owner"}:{" "}
+              {message.senderId === contractorId ? contractorId : ownerId}
+            </MessageSender>
+          </Message>
+        ))}
+      </MessageContainer>
 
           <InputContainer>
             <Input
