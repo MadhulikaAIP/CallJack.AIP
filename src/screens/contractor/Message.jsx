@@ -157,17 +157,11 @@ export default function MessageScreen() {
       try {
         const sentResponse = await fetch(`/api/messages/sent/${contractorId}`);
         const sentData = await sentResponse.json();
-        const sortedSentMessages = sentData.sort(
-        (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
-      );
-      setSentMessages(sortedSentMessages);
+        setSentMessages(sentData);
 
         const receivedResponse = await fetch(`/api/messages/received/${contractorId}`);
         const receivedData = await receivedResponse.json();
-         const sortedReceivedMessages = receivedData.sort(
-        (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
-      );
-      setReceivedMessages(sortedReceivedMessages);
+        setReceivedMessages(receivedData);
       } catch (error) {
         console.log(error);
       }
@@ -240,18 +234,22 @@ export default function MessageScreen() {
           <Info>Contractor ID: {contractorId}</Info>
 
           <MessageContainer>
-            {sentMessages.map((message) => (
-              <Message key={message.id} sent>
-                <MessageContent sent>{message.message}</MessageContent>
-                <MessageSender>You: {contractorId}</MessageSender>
-              </Message>
-            ))}
-            {receivedMessages.map((message) => (
-              <Message key={message.id}>
-                <MessageContent>{message.message}</MessageContent>
-                <MessageSender>Owner: {ownerId}</MessageSender>
-              </Message>
-            ))}
+            {([...sentMessages, ...receivedMessages] || [])
+              .sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp))
+              .map((message) => (
+                <Message
+                  key={message.id}
+                  sent={message.sender === contractorId}
+                >
+                  <MessageContent sent={message.sender === contractorId}>
+                    {message.message}
+                  </MessageContent>
+                  <MessageSender>
+                    {message.sender === contractorId ? "You" : "Owner"}:{" "}
+                    {message.sender === contractorId ? contractorId : ownerId}
+                  </MessageSender>
+                </Message>
+              ))}
           </MessageContainer>
 
           <InputContainer>
