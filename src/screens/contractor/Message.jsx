@@ -159,7 +159,7 @@ export default function MessageScreen() {
         const sentData = await sentResponse.json();
         setSentMessages(sentData);
 
-        const receivedResponse = await fetch(`/api/messages/received/${contractorId}`);
+        const receivedResponse = await fetch(`/api/messages/received/${ownerId}`);
         const receivedData = await receivedResponse.json();
         setReceivedMessages(receivedData);
       } catch (error) {
