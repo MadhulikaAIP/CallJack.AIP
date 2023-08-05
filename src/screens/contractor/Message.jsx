@@ -239,14 +239,14 @@ export default function MessageScreen() {
               .map((message) => (
                 <Message
                   key={message.id}
-                  sent={message.sender === contractorId}
+                  sent={message.senderId === contractorId}
                 >
-                  <MessageContent sent={message.sender === contractorId}>
+                  <MessageContent sent={message.senderId === contractorId}>
                     {message.message}
                   </MessageContent>
                   <MessageSender>
-                    {message.sender === contractorId ? "You" : "Owner"}:{" "}
-                    {message.sender === contractorId ? contractorId : ownerId}
+                    {message.senderId === contractorId ? "You" : "Owner"}:{" "}
+                    {message.senderId === contractorId ? contractorId : ownerId}
                   </MessageSender>
                 </Message>
               ))}
