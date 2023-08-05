@@ -155,7 +155,7 @@ export default function MessageScreen() {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const sentResponse = await fetch(`/api/messages/sent/${contractorId}`);
+        const sentResponse = await fetch(`/api/messages/sent/${ownerId}`);
         const sentData = await sentResponse.json();
         setSentMessages(sentData);
 
