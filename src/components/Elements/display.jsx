@@ -326,40 +326,40 @@ const SearchIndex = () => {
                   <CardDescription>{selectedItem.phone_number}</CardDescription>
                 )} */}
                 {selectedItem.experience && (
-                  <CardDescription>{selectedItem.experience}</CardDescription>
+                  <CardDescription><span style={{ fontWeight:'bold', fontSize:'16px'}}>Experience:</span>{selectedItem.experience}</CardDescription>
                 )}
                 {selectedItem.reputation && (
-                  <CardDescription>{selectedItem.reputation}</CardDescription>
+                  <CardDescription><span style={{ fontWeight:'bold', fontSize:'16px'}}>Charges:</span>{selectedItem.reputation}</CardDescription>
                 )}
                 {selectedItem.profile_image && (
                   <ProfileImage src={selectedItem.profile_image} alt="Profile" />
                 )}
                 {selectedItem.jobTitle && (
-                  <CardTitle>{selectedItem.jobTitle}</CardTitle>
+                  <CardTitle><span style={{ fontWeight:'bold', fontSize:'16px'}}>Job Title:</span>{selectedItem.jobTitle}</CardTitle>
                 )}
                 {selectedItem.jobDescription && (
-                  <CardDescription>{selectedItem.jobDescription}</CardDescription>
+                  <CardDescription><span style={{ fontWeight:'bold', fontSize:'16px'}}>Job Description:</span>{selectedItem.jobDescription}</CardDescription>
                 )}
                 {selectedItem.capacity && (
-                  <CardDescription>{selectedItem.capacity}</CardDescription>
+                  <CardDescription><span style={{ fontWeight:'bold', fontSize:'16px'}}>Capacity:</span>{selectedItem.capacity}</CardDescription>
                 )}
                 {selectedItem.timePeriod && (
-                  <CardDescription>{selectedItem.timePeriod}</CardDescription>
+                  <CardDescription><span style={{ fontWeight:'bold', fontSize:'16px'}}>Time Period:</span>{selectedItem.timePeriod}</CardDescription>
                 )}
                 {selectedItem.cost && (
-                  <CardDescription>{selectedItem.cost}</CardDescription>
+                  <CardDescription><span style={{ fontWeight:'bold', fontSize:'16px'}}>Cost:</span>{selectedItem.cost}</CardDescription>
                 )}
                 {selectedItem.location && (
-                  <CardDescription>{selectedItem.location}</CardDescription>
+                  <CardDescription><span style={{ fontWeight:'bold', fontSize:'16px'}}>Location:</span>{selectedItem.location}</CardDescription>
                 )}
                 {selectedItem.pincode && (
-                  <CardDescription>{selectedItem.pincode}</CardDescription>
+                  <CardDescription><span style={{ fontWeight:'bold', fontSize:'16px'}}>Pincode:</span>{selectedItem.pincode}</CardDescription>
                 )}
                 {selectedItem.state && (
-                  <CardDescription>{selectedItem.state}</CardDescription>
+                  <CardDescription><span style={{ fontWeight:'bold', fontSize:'16px'}}>State:</span>{selectedItem.state}</CardDescription>
                 )}
                 {selectedItem.country && (
-                  <CardDescription>{selectedItem.country}</CardDescription>
+                  <CardDescription><span style={{ fontWeight:'bold', fontSize:'16px'}}>Country:</span>{selectedItem.country}</CardDescription>
                 )}
                 <ActionButtons>
                   <Button onClick={openLoginPopup}>Check</Button>
