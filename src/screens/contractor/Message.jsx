@@ -157,11 +157,17 @@ export default function MessageScreen() {
       try {
         const sentResponse = await fetch(`/api/messages/sent/${contractorId}`);
         const sentData = await sentResponse.json();
-        setSentMessages(sentData);
+        const sortedSentMessages = sentData.sort(
+        (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
+      );
+        setSentMessages(sortedSentMessages);
 
         const receivedResponse = await fetch(`/api/messages/received/${contractorId}`);
         const receivedData = await receivedResponse.json();
-        setReceivedMessages(receivedData);
+        const sortedReceivedMessages = receivedData.sort(
+        (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
+      );
+        setReceivedMessages(sortedReceivedMessages);
       } catch (error) {
         console.log(error);
       }
@@ -239,15 +245,23 @@ export default function MessageScreen() {
           <Info>Contractor ID: {contractorId}</Info>
 
           <MessageContainer>
-            {allMessages.map((message) => (
-            <Message key={message.id} sent={message.sent}>
-            <MessageContent sent={message.sent}>{message.message}</MessageContent>
-            <MessageSender>
-              {message.sent ? "You" : "Owner"}
-            </MessageSender>
-           </Message>
+            {[...sentMessages, ...receivedMessages].map((message) => (
+              <MessageWrapper key={message.id}>
+                {message.sender === contractorId ? ( // Check if the sender is the contractor
+                  <Message sent>
+                    <MessageContent sent>{message.message}</MessageContent>
+                    <MessageSender>You: {contractorId}</MessageSender>
+                  </Message>
+                ) : (
+                  <Message>
+                    <MessageContent>{message.message}</MessageContent>
+                    <MessageSender>Owner: {ownerId}</MessageSender>
+                  </Message>
+                )}
+              </MessageWrapper>
             ))}
           </MessageContainer>
+
 
           <InputContainer>
             <Input
