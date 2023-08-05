@@ -281,11 +281,11 @@ const Messages = () => {
 
   const uniqueSenders = [...new Set(chatInbox.map((chat) => chat.senderId))];
 
-   const handleKeyPress = (e) => {
+  {/*   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       sendMessage();
     }
-  };
+  };*/}
 
   return (
     <Wrapper>
@@ -356,7 +356,7 @@ const Messages = () => {
                   type="text"
                   value={messageInput}
                   onChange={(e) => setMessageInput(e.target.value)}
-                  onKeyPress={handleKeyPress} // Call sendMessage when Enter key is pressed
+                 /* onKeyPress={handleKeyPress} // Call sendMessage when Enter key is pressed*/
                   placeholder="Type your message..."
                 />
                 <ChatSendButton onClick={handleSendMessage}>Send</ChatSendButton>
