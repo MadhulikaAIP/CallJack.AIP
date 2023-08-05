@@ -608,10 +608,11 @@ app.get("/api/jobs/accepted", authenticateUser, (req, res) => {
 // Endpoint to get sent messages for a specific owner
 app.get('/api/messages/sent/:ownerId', authenticateUser, (req, res) => {
   const ownerId = req.params.ownerId;
+  const contractorId = req.session.userId;
 
   // Get sent messages for the owner from the database
-  const query = 'SELECT * FROM chat_messages WHERE senderId = ?';
-  connection.query(query, [ownerId], (error, results) => {
+  const query = 'SELECT * FROM chat_messages WHERE (senderId = ? AND receiverId = ?)';
+  connection.query(query, [contractorId,ownerId], (error, results) => {
     if (error) {
       console.error('Error retrieving sent messages:', error);
       res.status(500).json({ error: 'Failed to retrieve sent messages' });
@@ -650,12 +651,13 @@ app.post('/api/messages/:ownerId', authenticateUser, (req, res) => {
 });
 
 // Endpoint to get received messages for a specific contractor
-app.get('/api/messages/received/:contractorId', authenticateUser, (req, res) => {
-  const contractorId = req.params.contractorId;
+app.get('/api/messages/received/:ownerId', authenticateUser, (req, res) => {
+  const ownerId = req.params.ownerId;
+  const contractorId = req.session.userId;
 
   // Get received messages for the contractor from the database
-  const query = 'SELECT * FROM chat_messages WHERE receiverId = ?';
-  connection.query(query, [contractorId], (error, results) => {
+  const query = 'SELECT * FROM chat_messages WHERE (receiverId = ? AND senderId = ?)';
+  connection.query(query, [contractorId,ownerId], (error, results) => {
     if (error) {
       console.error('Error retrieving received messages:', error);
       res.status(500).json({ error: 'Failed to retrieve received messages' });
