@@ -215,6 +215,12 @@ export default function MessageScreen() {
     console.log("contractorId:", contractorId);
     console.log("ownerId:", ownerId);
   }, [contractorId, ownerId]);
+
+ // Sort sentMessages based on timestamp
+  const sortedSentMessages = sentMessages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
+  // Sort receivedMessages based on timestamp
+  const sortedReceivedMessages = receivedMessages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
   
   return (
     <Wrapper>
@@ -242,19 +248,18 @@ export default function MessageScreen() {
           <Info>Contractor ID: {contractorId}</Info>
 
            <MessageContainer>
-            {[...sentMessages, ...receivedMessages]
-              .sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp))
-              .map((message) => (
-                <Message key={message.id} sent={message.receiverId === contractorId}>
-                  <MessageContent sent={message.receiverId === contractorId}>
-                    {message.message}
-                  </MessageContent>
-                  <MessageSender>
-                    {message.receiverId === contractorId ? "You" : "Owner"}:{" "}
-                    {message.senderId}
-                  </MessageSender>
-                </Message>
-              ))}
+            {sortedReceivedMessages.map((message) => (
+              <Message key={message.id}>
+                <MessageContent>{message.message}</MessageContent>
+                <MessageSender>Owner: {message.senderId === contractorId ? ownerId : contractorId}</MessageSender>
+              </Message>
+            ))}
+            {sortedSentMessages.map((message) => (
+              <Message key={message.id} sent>
+                <MessageContent sent>{message.message}</MessageContent>
+                <MessageSender>You: {message.senderId === contractorId ? contractorId : ownerId}</MessageSender>
+              </Message>
+            ))}
           </MessageContainer>
 
           <InputContainer>
