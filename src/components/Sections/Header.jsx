@@ -14,8 +14,8 @@ export default function Header() {
         <div>
           <h1 className="extraBold font60">Call-Jack</h1>
           <HeaderP className="font13 semiBold">
-          Welcome and Discover Call Jack - Your ultimate platform for skilled contractors.
-          Post jobs, review profiles, and connect directly to efficiently complete your projects!  </HeaderP>
+          Welcome to Call Jack, your ultimate platform for finding skilled contractors. Discover a seamless and efficient way to post jobs, review contractor profiles, and connect directly to get your projects done with ease.
+          Join us now and experience the convenience of hiring skilled professionals for all your repair and maintenance needs!  </HeaderP>
           <BtnWrapper>
             <FullButton title="Get Started" />
           </BtnWrapper>
