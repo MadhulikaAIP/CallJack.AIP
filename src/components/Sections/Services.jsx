@@ -23,7 +23,7 @@ export default function Services() {
           <HeaderInfo>
             <h1 className="font40 extraBold">Our Awesome Services</h1>
             <p className="font13">
-            At Contractor Connect, we offer a wide range of services to cater to your repair and maintenance needs. 
+            At Call Jack, we offer a wide range of services to cater to your repair and maintenance needs. 
             <br/>Our skilled contractors are experienced in various fields and can provide high-quality workmanship. Whether you need assistance with home repairs, renovations, or ongoing property maintenance, we've got you covered.              <br />
             </p>
           </HeaderInfo>
