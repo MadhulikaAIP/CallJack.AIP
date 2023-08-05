@@ -210,6 +210,12 @@ export default function MessageScreen() {
     }
   };
 
+  // Log contractorId and ownerId in the console
+  useEffect(() => {
+    console.log("contractorId:", contractorId);
+    console.log("ownerId:", ownerId);
+  }, [contractorId, ownerId]);
+  
   return (
     <Wrapper>
       <TopNavbar />
