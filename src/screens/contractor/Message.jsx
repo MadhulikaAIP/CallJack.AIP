@@ -207,6 +207,11 @@ export default function MessageScreen() {
       sendMessage();
     }
   };
+
+   // Merge sent and received messages into one array and sort them based on timestamp
+  const allMessages = [...sentMessages, ...receivedMessages].sort(
+    (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
+  );
   
   return (
     <Wrapper>
@@ -234,17 +239,13 @@ export default function MessageScreen() {
           <Info>Contractor ID: {contractorId}</Info>
 
           <MessageContainer>
-            {sentMessages.map((message) => (
-              <Message key={message.id} sent>
-                <MessageContent sent>{message.message}</MessageContent>
-                <MessageSender>You: {contractorId}</MessageSender>
-              </Message>
-            ))}
-            {receivedMessages.map((message) => (
-              <Message key={message.id}>
-                <MessageContent>{message.message}</MessageContent>
-                <MessageSender>Owner: {ownerId}</MessageSender>
-              </Message>
+            {allMessages.map((message) => (
+              <Message key={message.id} sent={message.sent}>
+            <MessageContent sent={message.sent}>{message.message}</MessageContent>
+            <MessageSender>
+              {message.sent ? "You: " + contractorId : "Owner: " + ownerId}
+            </MessageSender>
+          </Message>
             ))}
           </MessageContainer>
 
