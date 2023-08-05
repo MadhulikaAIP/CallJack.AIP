@@ -245,12 +245,12 @@ export default function MessageScreen() {
             {[...sentMessages, ...receivedMessages]
               .sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp))
               .map((message) => (
-                <Message key={message.id} sent={message.senderId === contractorId}>
-                  <MessageContent sent={message.senderId === contractorId}>
+                <Message key={message.id} sent={message.receiverId === contractorId}>
+                  <MessageContent sent={message.receiverId === contractorId}>
                     {message.message}
                   </MessageContent>
                   <MessageSender>
-                    {message.senderId === contractorId ? "You" : "Owner"}:{" "}
+                    {message.receiverId === contractorId ? "You" : "Owner"}:{" "}
                     {message.senderId}
                   </MessageSender>
                 </Message>
