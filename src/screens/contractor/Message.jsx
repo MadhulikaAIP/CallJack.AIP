@@ -157,10 +157,12 @@ export default function MessageScreen() {
       try {
         const sentResponse = await fetch(`/api/messages/sent/${ownerId}`);
         const sentData = await sentResponse.json();
+        console.log("Sent Messages:", sentData);
         setSentMessages(sentData);
 
         const receivedResponse = await fetch(`/api/messages/received/${ownerId}`);
         const receivedData = await receivedResponse.json();
+        console.log("Received Messages:", receivedData);
         setReceivedMessages(receivedData);
       } catch (error) {
         console.log(error);
