@@ -108,7 +108,7 @@ const Message = styled.div`
 
 const MessageContent = styled.p`
   margin-bottom: 5px;
-  background-color: ${({ sent }) => (sent ? "#f1f0f0" : "#d6eaf8")};
+  background-color: ${({ sent }) => (sent ? "#d6eaf8" : "#f1f0f0")};
   padding: 8px;
   border-radius: ${({ sent }) => (sent ? "10px 10px 0 10px" : "10px 10px 10px 0")};
 `;
@@ -240,12 +240,12 @@ export default function MessageScreen() {
 
           <MessageContainer>
             {allMessages.map((message) => (
-              <Message key={message.id} sent={message.sent}>
+            <Message key={message.id} sent={message.sent}>
             <MessageContent sent={message.sent}>{message.message}</MessageContent>
             <MessageSender>
-              {message.sent ? "You: " + contractorId : "Owner: " + ownerId}
+              {message.sent ? "You" : "Owner"}
             </MessageSender>
-          </Message>
+           </Message>
             ))}
           </MessageContainer>
 
