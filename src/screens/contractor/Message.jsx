@@ -233,24 +233,21 @@ export default function MessageScreen() {
           <Info>Owner ID: {ownerId}</Info>
           <Info>Contractor ID: {contractorId}</Info>
 
-          <MessageContainer>
-  {([...sentMessages, ...receivedMessages] || [])
-    .sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp))
-    .map((message) => (
-      <Message
-        key={message.id}
-        sent={message.senderId === contractorId}
-      >
-        <MessageContent sent={message.senderId === contractorId}>
-          {message.message}
-        </MessageContent>
-        <MessageSender>
-          {message.senderId === contractorId ? "You" : "Owner"}:{" "}
-          {message.senderId === contractorId ? contractorId : ownerId}
-        </MessageSender>
-      </Message>
-    ))}
-</MessageContainer>
+           <MessageContainer>
+            {[...sentMessages, ...receivedMessages]
+              .sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp))
+              .map((message) => (
+                <Message key={message.id} sent={message.senderId === contractorId}>
+                  <MessageContent sent={message.senderId === contractorId}>
+                    {message.message}
+                  </MessageContent>
+                  <MessageSender>
+                    {message.senderId === contractorId ? "You" : "Owner"}:{" "}
+                    {message.senderId === contractorId ? contractorId : ownerId}
+                  </MessageSender>
+                </Message>
+              ))}
+          </MessageContainer>
 
 
           <InputContainer>
