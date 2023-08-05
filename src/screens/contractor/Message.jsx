@@ -245,12 +245,11 @@ export default function MessageScreen() {
                   </MessageContent>
                   <MessageSender>
                     {message.senderId === contractorId ? "You" : "Owner"}:{" "}
-                    {message.senderId === contractorId ? contractorId : ownerId}
+                    {message.senderId}
                   </MessageSender>
                 </Message>
               ))}
           </MessageContainer>
-
 
           <InputContainer>
             <Input
