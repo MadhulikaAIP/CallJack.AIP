@@ -22,7 +22,7 @@ export default function Projects() {
           <HeaderInfo>
             <h1 className="font40 extraBold">Our Team</h1>
             <p className="font13">
-            Get to know the dedicated individuals behind Contractor Connect. 
+            Get to know the dedicated individuals behind Call Jack. 
             Our team is comprised of experienced professionals who are passionate about connecting property owners and contractors and delivering outstanding service. 
             Learn more about our team members and their expertise.
             </p>
