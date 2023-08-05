@@ -216,11 +216,15 @@ export default function MessageScreen() {
     console.log("ownerId:", ownerId);
   }, [contractorId, ownerId]);
 
-   // Combine sent and received messages into a single array
-  const allMessages = [...sentMessages, ...receivedMessages];
+// Create an array of message objects with type indicator (sent/received)
+  const messageObjects = [
+    ...sentMessages.map((message) => ({ ...message, type: "sent" })),
+    ...receivedMessages.map((message) => ({ ...message, type: "received" })),
+  ];
 
   // Sort all messages based on timestamp
-  const sortedMessages = allMessages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+  const sortedMessages = messageObjects.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
 
   
   return (
@@ -248,16 +252,14 @@ export default function MessageScreen() {
           <Info>Owner ID: {ownerId}</Info>
           <Info>Contractor ID: {contractorId}</Info>
 
-           <MessageContainer>
+        <MessageContainer>
         {/* Display all messages */}
         {sortedMessages.map((message) => (
-          <Message key={message.id} sent={message.senderId === contractorId}>
-            <MessageContent sent={message.senderId === contractorId}>
-              {message.message}
-            </MessageContent>
+          <Message key={message.id} sent={message.type === "sent"}>
+            <MessageContent sent={message.type === "sent"}>{message.message}</MessageContent>
             <MessageSender>
-              {message.senderId === contractorId ? "You" : "Owner"}:{" "}
-              {message.senderId === contractorId ? contractorId : ownerId}
+              {message.type === "sent" ? "You" : "Owner"}:{" "}
+              {message.type === "sent" ? contractorId : ownerId}
             </MessageSender>
           </Message>
         ))}
