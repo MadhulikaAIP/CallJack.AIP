@@ -202,7 +202,12 @@ export default function MessageScreen() {
     }
   };
   
-
+ const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      sendMessage();
+    }
+  };
+  
   return (
     <Wrapper>
       <TopNavbar />
@@ -248,6 +253,7 @@ export default function MessageScreen() {
               type="text"
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
+              onKeyPress={handleKeyPress} // Call sendMessage when Enter key is pressed
               placeholder="Type your message..."
             />
             <Button onClick={sendMessage}>Send</Button>
