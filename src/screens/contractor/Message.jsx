@@ -108,7 +108,7 @@ const Message = styled.div`
 
 const MessageContent = styled.p`
   margin-bottom: 5px;
-  background-color: ${({ sent }) => (sent ? "#d6eaf8" : "#f1f0f0")};
+  background-color: ${({ sent }) => (sent ? "#f1f0f0" : "#d6eaf8")};
   padding: 8px;
   border-radius: ${({ sent }) => (sent ? "10px 10px 0 10px" : "10px 10px 10px 0")};
 `;
@@ -160,14 +160,14 @@ export default function MessageScreen() {
         const sortedSentMessages = sentData.sort(
         (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
       );
-        setSentMessages(sortedSentMessages);
+      setSentMessages(sortedSentMessages);
 
         const receivedResponse = await fetch(`/api/messages/received/${contractorId}`);
         const receivedData = await receivedResponse.json();
-        const sortedReceivedMessages = receivedData.sort(
+         const sortedReceivedMessages = receivedData.sort(
         (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
       );
-        setReceivedMessages(sortedReceivedMessages);
+      setReceivedMessages(sortedReceivedMessages);
       } catch (error) {
         console.log(error);
       }
@@ -208,13 +208,12 @@ export default function MessageScreen() {
     }
   };
   
- const handleKeyPress = (e) => {
+  const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       sendMessage();
     }
   };
 
-  
   return (
     <Wrapper>
       <TopNavbar />
@@ -241,18 +240,19 @@ export default function MessageScreen() {
           <Info>Contractor ID: {contractorId}</Info>
 
           <MessageContainer>
-          {[...sentMessages, ...receivedMessages].map((message) => (
-            <Message key={message.id} sent={message.sender === contractorId}>
-              <MessageContent sent={message.sender === contractorId}>
-                {message.message}
-              </MessageContent>
-              <MessageSender>
-                {message.sender === contractorId ? "You" : "Owner"}:{" "}
-                {message.sender === contractorId ? contractorId : ownerId}
-              </MessageSender>
-            </Message>
-          ))}
-        </MessageContainer>
+            {sentMessages.map((message) => (
+              <Message key={message.id} sent>
+                <MessageContent sent>{message.message}</MessageContent>
+                <MessageSender>You: {contractorId}</MessageSender>
+              </Message>
+            ))}
+            {receivedMessages.map((message) => (
+              <Message key={message.id}>
+                <MessageContent>{message.message}</MessageContent>
+                <MessageSender>Owner: {ownerId}</MessageSender>
+              </Message>
+            ))}
+          </MessageContainer>
 
           <InputContainer>
             <Input
