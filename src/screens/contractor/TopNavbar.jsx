@@ -8,6 +8,8 @@ import BurgerIcon from "../../assets/svg/BurgerIcon";
 export default function TopNavbar() {
   const [y, setY] = useState(window.scrollY);
   const [sidebarOpen, toggleSidebar] = useState(false);
+  const [loggedOut, setLoggedOut] = useState(false); // New state variable for logout status
+
 
   useEffect(() => {
     window.addEventListener("scroll", () => setY(window.scrollY));
@@ -47,6 +49,11 @@ export default function TopNavbar() {
             <li className="semiBold font15 pointer">
               <RouterLink
                 to="/"
+                onClick={() => {
+                  // Set the logout status to true when the link is clicked
+                    setLoggedOut(true);
+                  // You can also perform any necessary logout actions here
+                }}
                 style={{ padding: "10px 30px 10px 10px", fontSize: "18px", fontWeight: "bold", color: "white" }}
               >
                 Logout
@@ -69,6 +76,8 @@ export default function TopNavbar() {
           </SidebarContainer>
         </NavInner>
       </Wrapper>
+       {/* Show the logout message */}
+      {loggedOut && <p>Mission: Logout Accomplished. Until we meet again!</p>}
     </>
   );
 }
