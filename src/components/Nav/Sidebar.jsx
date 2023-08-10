@@ -1,19 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-scroll";
+import { Link as RouterLink } from "react-router-dom";
 // Assets
 import CloseIcon from "../../assets/svg/CloseIcon";
 import LogoIcon from "../../assets/svg/Logo";
+import Logo from "../../assets/img/Logo1.jpg";
 
 export default function Sidebar({ sidebarOpen, toggleSidebar }) {
   return (
     <Wrapper className="animate darkBg" sidebarOpen={sidebarOpen}>
       <SidebarHeader className="flexSpaceCenter">
         <div className="flexNullCenter">
-          <LogoIcon />
-          <h1 className="whiteColor font20" style={{ marginLeft: "15px" }}>
-            fanatic
-          </h1>
+        {/* <RouterLink className="" to="/" smooth={true}>
+            <img
+              src={Logo}
+              alt="Call-Jack"
+              style={{ width: "100px", height: "50px", marginTop: "20px", marginLeft: "50px" }}
+            />
+          </RouterLink> */}
         </div>
         <CloseBtn onClick={() => toggleSidebar(!sidebarOpen)} className="animate pointer">
           <CloseIcon />
@@ -55,12 +60,12 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
             activeClass="active"
             className="whiteColor"
             style={{ padding: "10px 15px" }}
-            to="projects"
+            to="portfolio"
             spy={true}
             smooth={true}
             offset={-60}
           >
-            Projects
+            Work
           </Link>
         </li>
         <li className="semiBold font15 pointer">
@@ -69,15 +74,15 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
             activeClass="active"
             className="whiteColor"
             style={{ padding: "10px 15px" }}
-            to="blog"
+            to="projects"
             spy={true}
             smooth={true}
             offset={-60}
           >
-            Blog
+            Team
           </Link>
         </li>
-        <li className="semiBold font15 pointer">
+        {/* <li className="semiBold font15 pointer">
           <Link
             onClick={() => toggleSidebar(!sidebarOpen)}
             activeClass="active"
@@ -90,7 +95,7 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
           >
             Pricing
           </Link>
-        </li>
+        </li> */}
         <li className="semiBold font15 pointer">
           <Link
             onClick={() => toggleSidebar(!sidebarOpen)}
@@ -102,19 +107,19 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
             smooth={true}
             offset={-60}
           >
-            Contact
+            Contact Us
           </Link>
         </li>
       </UlStyle>
       <UlStyle className="flexSpaceCenter">
         <li className="semiBold font15 pointer">
-          <a href="/" style={{ padding: "10px 30px 10px 0" }} className="whiteColor">
-            Log in
+          <a href="/Login" style={{ padding: "10px 30px 10px 0" }} className="whiteColor">
+            Login
           </a>
         </li>
-        <li className="semiBold font15 pointer flexCenter">
-          <a href="/" className="radius8 lightBg" style={{ padding: "10px 15px" }}>
-            Get Started
+        <li className="semiBold font15 pointer">
+          <a href="/Register" style={{ padding: "10px 30px 10px 0" }} className="whiteColor">
+            Register
           </a>
         </li>
       </UlStyle>
