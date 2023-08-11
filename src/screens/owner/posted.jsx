@@ -13,6 +13,7 @@ const Posted = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [editingJobId, setEditingJobId] = useState(null);
+  const [contractors, setContractors] = useState([]);
 
   // Add a state variable to store the updated job list
   const [updatedPostedJobs, setUpdatedPostedJobs] = useState(postedJobs);
@@ -54,6 +55,28 @@ const Posted = () => {
     setPostedJobs((prevJobs) =>
       prevJobs.map((job) => (job.id === jobId ? { ...job, ...updatedData } : job))
     );
+  };
+
+  // Fetch contractor data
+  const fetchContractors = async () => {
+    try {
+      const response = await fetch('/api/contractors');
+      const data = await response.json();
+      setContractors(data);
+    } catch (error) {
+      console.log('Error fetching contractors:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchContractors();
+  }, []);
+
+  // Function to get contractor's name by ID
+  const getContractorNameById = (contractorId) => {
+    console.log(contractors);
+    const contractor = contractors.find((c) => String(c.id) === contractorId);
+    return contractor ? contractor.username : 'N/A';
   };
 
   const JobCard = ({ job, onUpdate }) => {
@@ -206,6 +229,7 @@ const Posted = () => {
         </td>
         <td>{job.status}</td>
         <td>{job.contractorId}</td>
+         <td>{getContractorNameById(job.contractorId)}</td>
         <td>{job.Pay}</td>
         <td>
         {job.status === 'accepted' && !isJobPaymentSuccessful ? (
@@ -267,6 +291,7 @@ const Posted = () => {
                   <th>Location</th>
                   <th>Status</th>
                   <th>Contractor ID</th>
+                  <th>Contractor Name</th>
                   <th>Pay</th>
                   <th>Payment</th>
                 </tr>
