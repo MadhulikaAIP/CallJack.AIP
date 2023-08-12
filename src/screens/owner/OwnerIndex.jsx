@@ -18,6 +18,14 @@ export default function OwnerPage() {
   const [selectedFilter, setSelectedFilter] = useState('all');
   const [allContractors, setAllContractors] = useState([]);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showChatPopup, setShowChatPopup] = useState(false);
+  const [chatInbox, setChatInbox] = useState([]);
+  const [chatMessages, setChatMessages] = useState([]);
+  const [selectedContractorForChat, setSelectedContractorForChat] = useState(null);
+  const [newMessage, setNewMessage] = useState("");
+  const [sendMessageError, setSendMessageError] = useState("");
+  const [ownerId, setOwnerId] = useState(null);
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -41,6 +49,8 @@ export default function OwnerPage() {
         const data = await response.json();
         console.log("Owner Details:", data);
         const ownerName = data.username;
+         // Set owner's id in the state
+         setOwnerId(data.id);
         setOwnerDetails(data);
         setOwnerName(ownerName);
         setError(null); // Clear any previous errors
@@ -116,6 +126,29 @@ export default function OwnerPage() {
     setSearchQuery("");
     setSearchResults([]);
   };
+  const openChatPopup = async (contractor) => {
+    setSelectedContractorForChat(contractor);
+    setShowChatPopup(true);
+  
+    try {
+      const chatInboxResponse = await fetch(`/api/chat/inbox/owner/${ownerId}`);
+      const chatInboxData = await chatInboxResponse.json();
+      setChatInbox(chatInboxData);
+  
+      const contractorId = contractor.id;
+      const messagesResponse = await fetch(`/api/chat/messages/${contractorId}`);
+      const messagesData = await messagesResponse.json();
+      setChatMessages(messagesData.messages);
+    } catch (error) {
+      console.error("Error fetching chat data:", error);
+    }
+  };
+  
+  
+  const closeChatPopup = () => {
+    setSelectedContractorForChat(null);
+    setShowChatPopup(false);
+  };
 
   const handleFilterChange = (event) => {
     const filter = event.target.value;
@@ -147,6 +180,42 @@ export default function OwnerPage() {
     }
   };
 
+  const handleSendMessage = async () => {
+    try {
+      const ownerResponse = await fetch('/api/owner/current');
+      const ownerData = await ownerResponse.json();
+      const ownerId = ownerData.id;
+  
+      const response = await fetch('/api/chat/send-message', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          senderId: ownerId,
+          receiverId: selectedContractorForChat.id,
+          message: newMessage,
+        }),
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error);
+      }
+  
+      // Clear the message input and reset the selected contractor
+      setNewMessage("");
+      setSendMessageError("");
+  
+      // Fetch the updated chat messages
+      const messagesResponse = await fetch(`/api/chat/messages/${selectedContractorForChat.id}`);
+      const messagesData = await messagesResponse.json();
+      setChatMessages(messagesData.messages);
+    } catch (error) {
+      console.log('Error sending message:', error);
+      setSendMessageError('Failed to send message');
+    }
+  };  
 
   const renderContractorDetails = () => {
     if (selectedContractor) {
@@ -243,6 +312,7 @@ export default function OwnerPage() {
                   key={contractor.id}
                   contractor={contractor}
                   onViewDetails={() => openContractorDetails(contractor)}
+                  onOpenChat={openChatPopup}
                 />
               ))}
             </SearchResults>
@@ -253,6 +323,17 @@ export default function OwnerPage() {
         </SearchSection>
 
         {renderContractorDetails()}
+        {showChatPopup && (
+      <ChatPopup
+        contractor={selectedContractorForChat}
+        messages={chatMessages}
+        newMessage={newMessage}
+        onMessageChange={(e) => setNewMessage(e.target.value)}
+        onSendMessage={handleSendMessage}
+        onClose={closeChatPopup}
+        ownerId={ownerId}
+      />
+       )}
 
         <FooterWrapper>
           <Footer />
@@ -334,6 +415,19 @@ const EditModal = ({ ownerDetails, onUpdateOwner, onClose }) => {
   );
 };
 
+const OwnerMessage = styled.div`
+  background-color: lightblue;
+  padding: 5px;
+  border-radius: 5px;
+  margin-right: auto;
+`;
+
+const ContractorMessage = styled.div`
+  background-color: lightgreen;
+  padding: 5px;
+  border-radius: 5px;
+  margin-left: auto;
+`;
 
 
 const Wrapper = styled.div`
@@ -495,7 +589,7 @@ const NoResultsMessage = styled.p`
   margin-top: 10px;
 `;
 
-const ContractorCard = ({ contractor, onViewDetails }) => {
+const ContractorCard = ({ contractor, onViewDetails, onOpenChat }) => {
   return (
     <CardWrapper>
       <OwnerAvatar src={OwnerProfileImage} alt="Owner Profile" />
@@ -531,22 +625,88 @@ const ContractorCard = ({ contractor, onViewDetails }) => {
       </ContractorInfo>
       <ButtonWrapper>
         <ContractorButton onClick={onViewDetails}>View</ContractorButton>
+        <ContractorButton onClick={() => onOpenChat(contractor)}>Message</ContractorButton>
       </ButtonWrapper>
     </CardWrapper>
   );
 };
 
-const ChatPopup = ({ contractor, onClose }) => {
+const ChatPopup = ({ contractor, messages, newMessage, onMessageChange, onSendMessage, onClose, ownerId }) => {
   return (
     <ChatContainer>
       <ChatHeader>
         <h3>Chat with {contractor.username}</h3>
         <CloseButton onClick={onClose}>X</CloseButton>
       </ChatHeader>
-      {/* Add chat messages and input form here */}
+      <ChatMessages>
+      {messages.map((message, index) => (
+          <MessageContainer key={index}>
+            {message.senderId === ownerId ? (
+              <OwnerMessage>
+                <MessageSender>You</MessageSender>:{" "}
+                <MessageText>{message.message}</MessageText>
+              </OwnerMessage>
+            ) : (
+              <ContractorMessage>
+                <MessageSender>Contractor</MessageSender>:{" "}
+                <MessageText>{message.message}</MessageText>
+              </ContractorMessage>
+            )}
+          </MessageContainer>
+        ))}
+      </ChatMessages>
+      <ChatInput>
+        <input
+          type="text"
+          placeholder="Type a message..."
+          value={newMessage}
+          onChange={onMessageChange}
+        />
+        <button onClick={onSendMessage}>Send</button>
+      </ChatInput>
     </ChatContainer>
   );
 };
+
+const ChatMessages = styled.div`
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+`;
+
+const ChatInput = styled.div`
+  display: flex;
+  align-items: center;
+
+  input {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 10px;
+    cursor: pointer;
+  }
+`;
+
+const MessageContainer = styled.div`
+  margin-bottom: 10px;
+`;
+
+const MessageSender = styled.span`
+  font-weight: bold;
+`;
+
+const MessageText = styled.p`
+  margin: 0;
+`;
 
 const ChatContainer = styled.div`
   position: fixed;
@@ -605,6 +765,7 @@ const ContractorButton = styled.button`
   padding: 8px 16px;
   cursor: pointer;
   font-weight:bold;
+  margin-left: 10px;
 `;
 
 const ContractorModal = styled.div`
