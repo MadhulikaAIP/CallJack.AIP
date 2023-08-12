@@ -10,7 +10,7 @@ import ProjectImg3 from "../../assets/img/team/Mehak.jpeg";
 import ProjectImg4 from "../../assets/img/team/Ashpreet.jpeg";
 import ProjectImg5 from "../../assets/img/team/Sukhan.jpeg";
 import ProjectImg6 from "../../assets/img/team/Likhitha.jpeg";
-import ProjectImg7  from "../../assets/img/team/01.jpg";
+import ProjectImg7  from "../../assets/img/team/photoAIP.PNG";
 import ProjectImg8 from "../../assets/img/team/Stanley.png"; /*src\assets\img\team\Likhitha.jpeg*/
 import AddImage2 from "../../assets/img/add/banner.jpeg";
 
