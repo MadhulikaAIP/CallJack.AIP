@@ -632,6 +632,12 @@ const ContractorCard = ({ contractor, onViewDetails, onOpenChat }) => {
 };
 
 const ChatPopup = ({ contractor, messages, newMessage, onMessageChange, onSendMessage, onClose, ownerId }) => {
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      onSendMessage(); // Call the onSendMessage function when Enter key is pressed
+    }
+  };
   return (
     <ChatContainer>
       <ChatHeader>
@@ -661,6 +667,7 @@ const ChatPopup = ({ contractor, messages, newMessage, onMessageChange, onSendMe
           placeholder="Type a message..."
           value={newMessage}
           onChange={onMessageChange}
+          onKeyDown={handleKeyDown} // Add the keydown event handler
         />
         <button onClick={onSendMessage}>Send</button>
       </ChatInput>
