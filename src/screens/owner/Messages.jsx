@@ -197,6 +197,7 @@ margin-left: -500px;
 const Messages = () => {
   const [chatInbox, setChatInbox] = useState([]);
   const [selectedContractor, setSelectedContractor] = useState(null);
+   const [selectedContractorName, setSelectedContractorName] = useState(null);
   const [messageInput, setMessageInput] = useState('');
   const [sendMessageError, setSendMessageError] = useState('');
   const [chatMessages, setChatMessages] = useState([]);
@@ -223,18 +224,29 @@ const Messages = () => {
   }, []);
 
   const handleContractorClick = async (contractorId) => {
-    setSelectedContractor(contractorId);
-
     try {
-      const response = await fetch(`/api/chat/messages/${contractorId}`);
-      if (!response.ok) {
-        throw new Error('Failed to fetch chat messages');
+      const [messagesResponse, contractorsResponse] = await Promise.all([
+        fetch(`/api/chat/messages/${contractorId}`),
+        fetch(`/api/contractors`),
+      ]);
+  
+      if (!messagesResponse.ok || !contractorsResponse.ok) {
+        throw new Error('Failed to fetch data');
       }
-      const data = await response.json();
-      setChatMessages(data.messages);
+  
+      const messagesData = await messagesResponse.json();
+      const contractorsData = await contractorsResponse.json();
+  
+      const selectedContractorData = contractorsData.find(
+        (contractor) => contractor.id === contractorId
+      );
+  
+      setChatMessages(messagesData.messages);
+      setSelectedContractor(selectedContractorData.id);
+      setSelectedContractorName(selectedContractorData.username)
       setChatPopupOpen(true);
     } catch (error) {
-      console.log('Error fetching chat messages:', error);
+      console.log('Error fetching chat messages or contractor details:', error);
     }
   };
 
@@ -331,7 +343,7 @@ const Messages = () => {
           <Overlay>
             <ChatPopup>
               <ChatHeader>
-                <ChatTitle>Chat with Contractor: {selectedContractor}</ChatTitle>
+                <ChatTitle>Chat with Contractor: {selectedContractorName}</ChatTitle>
                 <ChatCloseButton onClick={handleCloseChatPopup}>X</ChatCloseButton>
               </ChatHeader>
               <ChatContent>
